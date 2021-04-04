@@ -1,0 +1,4 @@
+node_modules
+.env
+configs/db.config.js
+configs/twitter.config.js
