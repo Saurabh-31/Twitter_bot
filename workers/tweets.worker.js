@@ -2,7 +2,10 @@
 
 const TweetModel = require('../models/tweets.model');
 
-
+module.exports.InsertOneTweet = async (context) => {
+    let newTweet = new TweetModel(context);
+    return await newTweet.save();
+}
 
 module.exports.InsertManyTweet = async (context) => {
     return await TweetModel.insertMany(context);

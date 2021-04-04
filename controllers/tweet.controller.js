@@ -50,7 +50,7 @@ const getFollowersList = async (req, res, next) => {
         var Twitter = new twit(config);
 
         var params = {
-            screen_name: 'Saurabh'
+            screen_name: screen_name
         }
 
         var users = [];
@@ -97,7 +97,7 @@ const getFollowingList = async (req, res, next) => {
         var Twitter = new twit(config);
 
         var params = {
-            screen_name: 'Saurabh43653005'
+            screen_name: screen_name
         }
 
         console.log('hfsek');
@@ -156,8 +156,10 @@ const getMineOrFollowerRecentTweets = async (req, res, next) => {
         console.log('t1 ', tweetlist);
 
         var params = {
-            screen_name: screen_name,
-            since_id: since_id
+            screen_name: screen_name
+        }
+        if(since_id != '' && since_id != undefined){
+            params = {...params,since_id: since_id }
         }
 
         Twitter.get('statuses/home_timeline', params, gettingTweets);

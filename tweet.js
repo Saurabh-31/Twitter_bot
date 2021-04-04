@@ -5,6 +5,7 @@ const config = require('./configs/twitter.config');
 const db = require('./helpers/db.helper');
 const followingWorker = require('./workers/following.worker');
 const followerWorker = require('./workers/follower.worker');
+const tweetWorker = require('./workers/tweets.worker');
 
 var Twitter = new twit(config);
 
@@ -16,10 +17,10 @@ async function getusername() {
     } catch (error) {
         console.log('Getting following failed', error);
     }
-    if(followings && followings.length > 0){
+    if (followings && followings.length > 0) {
         followings = followings.map(item => item.username);
     }
-    console.log('get fol ',followings);
+    console.log('get fol ', followings);
     var username = randomFol(followings);
     console.log('userf ', username);
     return username;
@@ -28,22 +29,35 @@ async function getusername() {
 getusername();
 
 
-var tweet = function () {
+var tweet = async function () {
     var params = {
-        status: 'Hey this is me tweeting' + '@' + getusername()
+        status: 'Hey this is me tweeting 1'// + '@' + getusername()
     }
-    Twitter.get('statuses/update', params, function (err, data, response) {
+    var statuses = {};
+    Twitter.post('statuses/update', params, async function (err, data, response) {
         if (!err) {
-            console.log("respo : ", data);
+            // console.log("respo : ", data);
+            statuses = data;
+            if (data.text) {
+                statuses = { id_str: data.id_str, text: data.text, created_at: data.created_at }
+            }
+            console.log('tweets :', statuses);
+            if (statuses && statuses != {}) {
+                try {
+                    await tweetWorker.InsertOneTweet(statuses);
+                } catch (error) {
+                    console.log('Insert err ', error);
+                }
+            }
         }
         else {
-            console.log('Something went wrong while Tweeting...');
+            console.log('Something went wrong while Tweeting...', err);
         }
     });
 }
 
-// tweet();
-// setInterval(tweet,1000*60*30);
+tweet();
+setInterval(tweet, 1000 * 60 * 30);
 
 function randomFol(arr) {
     var index = Math.floor(Math.random() * arr.length);
