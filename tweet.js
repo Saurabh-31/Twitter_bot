@@ -30,8 +30,9 @@ getusername();
 
 
 var tweet = async function () {
+    var username = await getusername();
     var params = {
-        status: 'Hey this is me tweeting 1'// + '@' + getusername()
+        status: 'Hey this is me tweeting ' + '@' + username + ' I just want to say that you are awesome'
     }
     var statuses = {};
     Twitter.post('statuses/update', params, async function (err, data, response) {

@@ -175,7 +175,7 @@ const getMineOrFollowerRecentTweets = async (req, res, next) => {
                     }
                     return res;
                 });
-                console.log('tweets :', statuses);
+                console.log('tweetsall :', statuses);
                 if (statuses && statuses.length > 0) {
                     try {
                         await tweetWorker.InsertManyTweet(statuses);
