@@ -1,12 +1,18 @@
 console.log("ertwudrtrdhas");
 
 const twit = require('twit');
-const config = require('./configs/twitter.config');
+// const config = require('./configs/twitter.config');
 const db = require('./helpers/db.helper');
 const followingWorker = require('./workers/following.worker');
 const followerWorker = require('./workers/follower.worker');
 const tweetWorker = require('./workers/tweets.worker');
 
+var config = {
+    consumer_key: process.env.consumer_key,
+    consumer_secret: process.env.consumer_secret,
+    access_token: process.env.access_token,
+    access_token_secret: process.env.access_token_secret
+}
 var Twitter = new twit(config);
 
 async function getusername() {
