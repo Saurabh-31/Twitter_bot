@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') { require('dotenv').config() }
 var bot = require("./tweet");
 
 var indexRouter = require('./routes/index');

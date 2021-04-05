@@ -2,7 +2,7 @@
 
 const httpStatus = require('http-status');
 const twit = require('twit');
-// const config = require('../configs/twitter.config');
+const config = require('../configs/twitter.config');
 const followingWorker = require('../workers/following.worker');
 const followerWorker = require('../workers/follower.worker');
 const tweetWorker = require('../workers/tweets.worker');
@@ -12,12 +12,6 @@ const followSomeone = async (req, res, next) => {
         const body = req.body;
         const screen_name = body.screen_name;
 
-        var config = {
-            consumer_key: process.env.consumer_key,
-            consumer_secret: process.env.consumer_secret,
-            access_token: process.env.access_token,
-            access_token_secret: process.env.access_token_secret
-        }
         var Twitter = new twit(config);
 
         var params = {
@@ -53,12 +47,6 @@ const getFollowersList = async (req, res, next) => {
         const body = req.body;
         const screen_name = body.screen_name;
 
-        var config = {
-            consumer_key: process.env.consumer_key,
-            consumer_secret: process.env.consumer_secret,
-            access_token: process.env.access_token,
-            access_token_secret: process.env.access_token_secret
-        }
         var Twitter = new twit(config);
 
         var params = {
@@ -106,12 +94,6 @@ const getFollowingList = async (req, res, next) => {
         const body = req.body;
         const screen_name = body.screen_name;
 
-        var config = {
-            consumer_key: process.env.consumer_key,
-            consumer_secret: process.env.consumer_secret,
-            access_token: process.env.access_token,
-            access_token_secret: process.env.access_token_secret
-        }
         var Twitter = new twit(config);
 
         var params = {
@@ -163,12 +145,6 @@ const getMineOrFollowerRecentTweets = async (req, res, next) => {
         const body = req.body;
         const screen_name = body.screen_name;
 
-        var config = {
-            consumer_key: process.env.consumer_key,
-            consumer_secret: process.env.consumer_secret,
-            access_token: process.env.access_token,
-            access_token_secret: process.env.access_token_secret
-        }
         var Twitter = new twit(config);
         var since_id = '';
 
