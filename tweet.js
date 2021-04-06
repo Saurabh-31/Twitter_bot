@@ -3,6 +3,7 @@ console.log("ertwudrtrdhas");
 const twit = require('twit');
 const config = require('./configs/twitter.config');
 const db = require('./helpers/db.helper');
+const tweetController = require('./controllers/tweet.controller');
 const followingWorker = require('./workers/following.worker');
 const followerWorker = require('./workers/follower.worker');
 const tweetWorker = require('./workers/tweets.worker');
@@ -26,13 +27,11 @@ async function getusername() {
     return username;
 }
 
-getusername();
-
 
 var tweet = async function () {
     var username = await getusername();
     var params = {
-        status: 'Hey this is me tweeting ' + '@' + username + ' I just want to say that you are awesome'
+        status: 'Hey this is me tweeting ' + '@' + username + ' and I just want to say that you are awesome'
     }
     var statuses = {};
     Twitter.post('statuses/update', params, async function (err, data, response) {
@@ -59,6 +58,16 @@ var tweet = async function () {
 
 tweet();
 setInterval(tweet, 1000 * 60 * 30);
+
+tweetController.getFollowingList("Saurabh43653005");
+setInterval(() => {
+    tweetController.getFollowingList("Saurabh43653005");    
+}, 1000 * 60 * 30);
+
+tweetController.getFollowersList("Saurabh43653005");
+setInterval(() => {
+    tweetController.getFollowersList("Saurabh43653005");
+}, 1000 * 60 * 30);
 
 function randomFol(arr) {
     var index = Math.floor(Math.random() * arr.length);

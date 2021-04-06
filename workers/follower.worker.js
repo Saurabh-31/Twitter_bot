@@ -8,7 +8,7 @@ module.exports.InsertOneFollower = async (context) => {
 }
 
 module.exports.RemoveFollower = async (context) => {
-    return await FollowerModel.remove(context);
+    return await FollowerModel.deleteMany(context);
 }
 
 module.exports.InsertManyFollower = async (context) => {
