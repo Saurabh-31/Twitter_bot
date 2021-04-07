@@ -1,26 +1,25 @@
-var express = require('express');
-var router = express.Router();
+// var express = require('express');
+// var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+// /* GET home page. */
+// router.get('/', function(req, res, next) {
+//   res.render('index', { title: 'Express' });
+// });
 
-module.exports = router;
+// module.exports = router;
 
-// (function (applicationRoutes) {
+(function (applicationRoutes) {
 
-//   'use strict';
+  'use strict';
 
-//   require('../helpers/db.helper');
-//   var cors = require('cors');
+  require('../helpers/db.helper');
 
-//   applicationRoutes.init = function (app) {
+  applicationRoutes.init = function (app) {
 
 
-//     const tweetsRoutes = require('./tweets.route');
-//     app.use('/api/twitter/', tweetsRoutes);
+    const tweetsRoutes = require('./tweets.route');
+    app.use('/api/twitter/', tweetsRoutes);
 
-//   }
+  }
 
-// })(module.exports);
+})(module.exports);
